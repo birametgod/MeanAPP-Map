@@ -3,3 +3,5 @@ const router = express.Router();
 const velovController = require("../controllers/velov");
 
 router.get("", velovController.getVelov);
+
+module.exports = router;
