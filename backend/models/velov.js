@@ -40,8 +40,11 @@ const velovSchema = Schema({
       default: "Point"
     },
     coordinates: {
-      type: [Number],
-      index: "2dsphere"
+      type: [Number]
     }
   }
 });
+
+velovSchema.index({ geometry: "2dsphere" });
+
+module.exports = mongoose.model("Velov", velovSchema);
