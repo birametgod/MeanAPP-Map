@@ -50,6 +50,14 @@ export class VelovComponent implements OnInit {
     });
   }
 
+  max(coordType: 'lat' | 'lng'): number {
+    return Math.max(...this.coordinates.map(marker => marker[coordType]));
+  }
+
+  min(coordType: 'lat' | 'lng'): number {
+    return Math.min(...this.coordinates.map(marker => marker[coordType]));
+  }
+
   initForm() {
     this.searchFormGroup = new FormGroup({
       search: new FormControl('')

@@ -21,6 +21,7 @@
         Hi, this is the content of the <strong>info window</strong>
       </agm-info-window>
     </agm-marker>
+    <agm-rectangle [north]="max('lat')" [east]="max('lng')" [south]="min('lat')" [west]="min('lng')"> </agm-rectangle>
   </ng-container>
 </agm-map>
 <br />
