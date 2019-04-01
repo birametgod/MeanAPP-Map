@@ -1,9 +1,4 @@
 .contain {
-  display: flex;
-  flex-direction: column;
-}
-
-.contain > * {
   width: 100%;
 }
 
@@ -14,4 +9,13 @@
 
 table {
   width: 100%;
+}
+
+button.mat-raised-button.mat-accent {
+  height: fit-content;
+  margin-top: 2%;
+}
+
+agm-map {
+  height: 400px;
 }

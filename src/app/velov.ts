@@ -30,8 +30,6 @@ export class Velov {
   };
   geometry: {
     type: string;
-    coordinates: {
-      type: [number];
-    };
+    coordinates: [number];
   };
 }
