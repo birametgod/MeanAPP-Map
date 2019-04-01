@@ -40,7 +40,8 @@ const formatVelov = async () => {
                 last_update_fme: velovStruct.properties.last_update_fme,
                 code_insee: velovStruct.properties.code_insee
               },
-              geometry: { type: velovStruct.geometry.type, coordinates: velovStruct.geometry.coordinates }
+              geometry: { type: velovStruct.geometry.type, coordinates: velovStruct.geometry.coordinates },
+              index: '2dsphere'
             }
           ],
           (err, result) => {
