@@ -1,0 +1,17 @@
+.contain {
+  display: flex;
+  flex-direction: column;
+}
+
+.contain > * {
+  width: 100%;
+}
+
+.myTable {
+  height: 400px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}

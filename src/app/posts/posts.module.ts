@@ -5,8 +5,9 @@ import { PostListComponent } from '../post-list/post-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
+import { VelovComponent } from '../velov/velov.component';
 @NgModule({
-  declarations: [PostCreateComponent, PostListComponent],
+  declarations: [PostCreateComponent, PostListComponent, VelovComponent],
   imports: [CommonModule, ReactiveFormsModule, AngularMaterialModule, RouterModule]
 })
 export class PostsModule {}
