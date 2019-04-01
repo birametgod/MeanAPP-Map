@@ -1,10 +1,10 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const velovSchema = Schema({
   type: {
     type: String,
-    default: "Feature"
+    default: 'Feature'
   },
   Properties: {
     number: Number,
@@ -37,14 +37,12 @@ const velovSchema = Schema({
   geometry: {
     type: {
       type: String,
-      default: "Point"
+      default: 'Point'
     },
-    coordinates: {
-      type: [Number]
-    }
+    coordinates: [Number]
   }
 });
 
-velovSchema.index({ geometry: "2dsphere" });
+velovSchema.index({ geometry: '2dsphere' });
 
-module.exports = mongoose.model("Velov", velovSchema);
+module.exports = mongoose.model('Velov', velovSchema);

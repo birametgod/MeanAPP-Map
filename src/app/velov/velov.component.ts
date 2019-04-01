@@ -10,11 +10,13 @@ import { Velov } from '../velov';
   styleUrls: ['./velov.component.css']
 })
 export class VelovComponent implements OnInit {
+  coordinates: ICoordinate[] = [];
   searchFormGroup: FormGroup;
   stationVelov: Velov[] = [];
   displayedColumns = ['name', 'Velos', 'Stand'];
   lat = 45.735486;
   lng = 4.883498;
+  locationChosen = false;
 
   constructor(private velovService: VelovService) {}
 
@@ -22,8 +24,10 @@ export class VelovComponent implements OnInit {
     this.initForm();
   }
 
-  onChoseLocation(event: Event) {
-    console.log(event);
+  onChoseLocation(event) {
+    this.lat = event.coords.lat;
+    this.lng = event.coords.lng;
+    this.locationChosen = true;
   }
 
   getVelov() {
@@ -32,6 +36,17 @@ export class VelovComponent implements OnInit {
     this.velovService.getVelovUpdated().subscribe((velovUpdated: Velov[]) => {
       console.log(velovUpdated);
       this.stationVelov = velovUpdated;
+      let res: ICoordinate = { lat: null, lng: null };
+      this.coordinates = velovUpdated.map((oneVelovUpdated: Velov) => {
+        oneVelovUpdated.geometry.coordinates.map((coordinate, number) => {
+          if (number % 2 === 0) {
+            res = { ...res, lng: coordinate };
+          } else {
+            res = { ...res, lat: coordinate };
+          }
+        });
+        return res;
+      });
     });
   }
 
@@ -40,6 +55,11 @@ export class VelovComponent implements OnInit {
       search: new FormControl('')
     });
   }
+}
+
+export interface ICoordinate {
+  lat: number;
+  lng: number;
 }
 
 export interface IVelovSearchCriteria {
