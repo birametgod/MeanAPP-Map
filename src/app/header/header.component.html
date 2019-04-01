@@ -4,31 +4,23 @@
     <span class="example-fill-remaining-space"></span>
     <div *ngIf="isAuthenticate">
       <span>
-        <a mat-button routerLink="/create" routerLinkActive="mat-accent"
-          >new Post</a
-        >
+        <a mat-button routerLink="/create" routerLinkActive="mat-accent">new Post</a>
       </span>
       <span>
-        <a mat-button routerLinkActive="mat-accent" (click)="onLogout()"
-          >Logout</a
-        >
+        <a mat-button routerLinkActive="mat-accent" (click)="onLogout()">Logout</a>
       </span>
       <span
-        ><a mat-button routerLinkActive="mat-accent">
+        ><a mat-button routerLink="/station" routerLinkActive="router-link-active" routerLinkActive="mat-accent">
           Rechercher une Station
         </a></span
       >
     </div>
     <div *ngIf="!isAuthenticate">
       <span>
-        <a mat-button routerLink="/login" routerLinkActive="mat-accent"
-          >Login</a
-        >
+        <a mat-button routerLink="/login" routerLinkActive="mat-accent">Login</a>
       </span>
       <span>
-        <a mat-button routerLink="/signup" routerLinkActive="mat-accent"
-          >Sign up</a
-        >
+        <a mat-button routerLink="/signup" routerLinkActive="mat-accent">Sign up</a>
       </span>
     </div>
   </mat-toolbar>

@@ -1,12 +1,12 @@
-const Velov = require("../models/velov");
-const NodeGeocoder = require("node-geocoder");
+const Velov = require('../models/velov');
+const NodeGeocoder = require('node-geocoder');
 
 const options = {
-  provider: "opencage",
+  provider: 'opencage',
 
   // Optional depending on the providers
-  httpAdapter: "https", // Default
-  apiKey: "89631b453704442aaa57f9650760f8b7", // for Mapquest, OpenCage, Google Premier
+  httpAdapter: 'https', // Default
+  apiKey: '89631b453704442aaa57f9650760f8b7', // for Mapquest, OpenCage, Google Premier
   formatter: null // 'gpx', 'string', ...
 };
 
@@ -17,7 +17,7 @@ exports.getVelov = (req, res, next) => {
   let latitude;
   let longitude;
   geocoder
-    .geocode("79 cours de la liberté Lyon")
+    .geocode(req.query.address)
     .then(function(place) {
       console.log(place);
       place.forEach(response => {
@@ -28,7 +28,7 @@ exports.getVelov = (req, res, next) => {
           $near: {
             $maxDistance: 1000,
             $geometry: {
-              type: "Point",
+              type: 'Point',
               coordinates: [parseFloat(longitude), parseFloat(latitude)]
             }
           }

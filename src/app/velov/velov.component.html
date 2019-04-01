@@ -1,0 +1,30 @@
+<div class="contain" [formGroup]="searchFormGroup">
+  <mat-form-field>
+    <mat-label>Rechercher une station</mat-label>
+    <input matInput placeholder="Placeholder" formControlName="search" />
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+</div>
+
+<div class="myTable mat-elevation-z8" *ngIf="stationVelov && stationVelov.length">
+  <table mat-table [dataSource]="stationVelov">
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.properties.address }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Velos">
+      <th mat-header-cell *matHeaderCellDef>Velos</th>
+      <td mat-cell *matCellDef="let element">{{ element.properties.available_bikes }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Stand">
+      <th mat-header-cell *matHeaderCellDef>stands de vélos disponibles</th>
+      <td mat-cell *matCellDef="let element">{{ element.properties.available_bike_stands }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

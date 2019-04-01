@@ -5,12 +5,14 @@ import { PostCreateComponent } from './post-create/post-create.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { AuthGuardGuard } from './auth-guard.guard';
+import { VelovComponent } from './velov/velov.component';
 
 const routes: Routes = [
   { path: '', component: PostListComponent },
   { path: 'create', component: PostCreateComponent, canActivate: [AuthGuardGuard] },
   { path: 'edit/:postId', component: PostCreateComponent, canActivate: [AuthGuardGuard] },
   { path: 'login', component: LoginComponent },
+  { path: 'station', component: VelovComponent },
   { path: 'signup', component: SignupComponent }
 ];
 
