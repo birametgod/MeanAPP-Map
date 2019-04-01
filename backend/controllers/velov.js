@@ -17,11 +17,13 @@ exports.getVelov = (req, res, next) => {
   let latitude;
   let longitude;
   geocoder
-    .geocode(req.query.address)
+    .geocode({ address: req.query.address, country: 'France' })
     .then(function(place) {
       console.log(place);
       place.forEach(response => {
-        (latitude = response.latitude), (longitude = response.longitude);
+        if ((response.county === 'Lyon') | (response.county === 'Rhône')) {
+          (latitude = response.latitude), (longitude = response.longitude);
+        }
       });
       Velov.find({
         geometry: {

@@ -13,14 +13,22 @@ export class VelovComponent implements OnInit {
   searchFormGroup: FormGroup;
   stationVelov: Velov[] = [];
   displayedColumns = ['name', 'Velos', 'Stand'];
+  lat = 45.735486;
+  lng = 4.883498;
 
   constructor(private velovService: VelovService) {}
 
   ngOnInit() {
     this.initForm();
-    this.searchFormGroup.valueChanges.pipe(debounceTime(1000)).subscribe((result: IVelovSearchCriteria) => {
-      this.velovService.getVelov(result.search);
-    });
+  }
+
+  onChoseLocation(event: Event) {
+    console.log(event);
+  }
+
+  getVelov() {
+    const result = this.searchFormGroup.get('search').value;
+    this.velovService.getVelov(result);
     this.velovService.getVelovUpdated().subscribe((velovUpdated: Velov[]) => {
       console.log(velovUpdated);
       this.stationVelov = velovUpdated;

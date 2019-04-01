@@ -6,8 +6,20 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
 import { VelovComponent } from '../velov/velov.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { AgmCoreModule } from '@agm/core';
+
 @NgModule({
   declarations: [PostCreateComponent, PostListComponent, VelovComponent],
-  imports: [CommonModule, ReactiveFormsModule, AngularMaterialModule, RouterModule]
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    AngularMaterialModule,
+    RouterModule,
+    FlexLayoutModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCDtQpWIaVdnBubt8zkdedrXEwhytjDMz0'
+    })
+  ]
 })
 export class PostsModule {}

@@ -1,11 +1,18 @@
-<div class="contain" [formGroup]="searchFormGroup">
+<mat-card class="contain" [formGroup]="searchFormGroup" fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px">
   <mat-form-field>
-    <mat-label>Rechercher une station</mat-label>
+    <mat-label>Entrez une adresse</mat-label>
     <input matInput placeholder="Placeholder" formControlName="search" />
     <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
-</div>
-
+  <button mat-raised-button [disabled]="searchFormGroup.pristine" color="accent" (click)="getVelov()">
+    Rechercher
+  </button>
+</mat-card>
+<br />
+<agm-map [latitude]="lat" [longitude]="lng" (mapClick)="onChoseLocation($event)">
+  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+</agm-map>
+<br />
 <div class="myTable mat-elevation-z8" *ngIf="stationVelov && stationVelov.length">
   <table mat-table [dataSource]="stationVelov">
     <!-- Name Column -->
