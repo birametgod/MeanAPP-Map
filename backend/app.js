@@ -13,15 +13,9 @@ const MongoClient = require('mongodb').MongoClient;
 const fs = require('fs');
 const formatScript = require('./script/formatScript');
 
-// MongoClient.connect(db, (err, client) => {
-//   console.log(`connected to database `);
-//   console
-//   // Create a collection we want to drop later
-//   //const col = client.db(dbName).collection('createIndexExample1');
-//   // Show that duplicate records got dropped
-// });
-
 formatScript.formatVelov();
+formatScript.formatQuartiers();
+formatScript.formatPoinTouristiques();
 mongoose.connect(db, {
   useCreateIndex: true,
   useNewUrlParser: true
@@ -29,11 +23,13 @@ mongoose.connect(db, {
 
 setInterval(() => {
   formatScript.formatVelov();
+  formatScript.formatQuartiers();
+  formatScript.formatPoinTouristiques();
   mongoose.connect(db, {
     useCreateIndex: true,
     useNewUrlParser: true
   });
-}, 60 * 1000);
+}, 60 * 60000);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

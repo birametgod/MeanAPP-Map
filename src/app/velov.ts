@@ -1,6 +1,6 @@
 export class Velov {
   type: string;
-  Properties: {
+  properties: {
     number: number;
     name: string;
     address: string;

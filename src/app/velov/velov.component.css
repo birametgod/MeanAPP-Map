@@ -13,9 +13,10 @@ table {
 
 button.mat-raised-button.mat-accent {
   height: fit-content;
-  margin-top: 2%;
+  margin-top: 1%;
 }
 
 agm-map {
   height: 400px;
+  width: 100%;
 }

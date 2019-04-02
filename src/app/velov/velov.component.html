@@ -16,9 +16,19 @@
       [latitude]="marker.lat"
       [longitude]="marker.lng"
       [markerDraggable]="true"
+      (mapClick)="addMarker($event.coords.lat, $event.coords.lng)"
     >
       <agm-info-window [disableAutoPan]="true">
-        Hi, this is the content of the <strong>info window</strong>
+        <br />
+        <h3>{{ marker.name }}</h3>
+        <div fxLayout="row space-around">
+          <mat-icon [matBadge]="marker.available_bikes" matBadgeColor="warn" MatBadgeSize="small"
+            >directions_bike</mat-icon
+          >
+          <mat-icon [matBadge]="marker.available_bikes_stands" matBadgeColor="warn" MatBadgeSize="small"
+            >local_parking</mat-icon
+          >
+        </div>
       </agm-info-window>
     </agm-marker>
     <agm-rectangle [north]="max('lat')" [east]="max('lng')" [south]="min('lat')" [west]="min('lng')"> </agm-rectangle>

@@ -36,8 +36,11 @@ export class VelovComponent implements OnInit {
     this.velovService.getVelovUpdated().subscribe((velovUpdated: Velov[]) => {
       console.log(velovUpdated);
       this.stationVelov = velovUpdated;
-      let res: ICoordinate = { lat: null, lng: null };
+      let res: ICoordinate = { name: null, available_bikes: null, available_bikes_stands: null, lat: null, lng: null };
       this.coordinates = velovUpdated.map((oneVelovUpdated: Velov) => {
+        res = { ...res, name: oneVelovUpdated.properties.name };
+        res = { ...res, available_bikes: oneVelovUpdated.properties.available_bikes };
+        res = { ...res, available_bikes_stands: oneVelovUpdated.properties.available_bike_stands };
         oneVelovUpdated.geometry.coordinates.map((coordinate, number) => {
           if (number % 2 === 0) {
             res = { ...res, lng: coordinate };
@@ -48,6 +51,24 @@ export class VelovComponent implements OnInit {
         return res;
       });
     });
+  }
+
+  addMarker(lat: number, lng: number) {
+    // this.stationVelov = velovUpdated;
+    // let res: ICoordinate = { name: null, available_bikes: null, available_bikes_stands: null, lat: null, lng: null };
+    // this.coordinates = velovUpdated.map((oneVelovUpdated: Velov) => {
+    //   res = { ...res, name: oneVelovUpdated.properties.name };
+    //   res = { ...res, available_bikes: oneVelovUpdated.properties.available_bikes };
+    //   res = { ...res, available_bikes_stands: oneVelovUpdated.properties.available_bike_stands };
+    //   oneVelovUpdated.geometry.coordinates.map((coordinate, number) => {
+    //     if (number % 2 === 0) {
+    //       res = { ...res, lng: coordinate };
+    //     } else {
+    //       res = { ...res, lat: coordinate };
+    //     }
+    //   });
+    //   return res;
+    // });
   }
 
   max(coordType: 'lat' | 'lng'): number {
@@ -66,6 +87,9 @@ export class VelovComponent implements OnInit {
 }
 
 export interface ICoordinate {
+  name: string;
+  available_bikes: number;
+  available_bikes_stands: number;
   lat: number;
   lng: number;
 }
