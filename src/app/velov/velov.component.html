@@ -9,14 +9,18 @@
   </button>
 </mat-card>
 <br />
-<agm-map [latitude]="lat" [longitude]="lng" [zoom]="12" (mapClick)="onChoseLocation($event)">
+<agm-map
+  [latitude]="lat"
+  [longitude]="lng"
+  [zoom]="12"
+  (mapClick)="onChoseLocation($event.coords.lat, $event.coords.lng)"
+>
   <ng-container *ngIf="coordinates.length > 0">
     <agm-marker
       *ngFor="let marker of coordinates"
       [latitude]="marker.lat"
       [longitude]="marker.lng"
       [markerDraggable]="true"
-      (mapClick)="addMarker($event.coords.lat, $event.coords.lng)"
     >
       <agm-info-window [disableAutoPan]="true">
         <br />

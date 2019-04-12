@@ -24,32 +24,39 @@ export class VelovComponent implements OnInit {
     this.initForm();
   }
 
-  onChoseLocation(event) {
-    this.lat = event.coords.lat;
-    this.lng = event.coords.lng;
-    this.locationChosen = true;
+  onChoseLocation(lat: number, lng: number) {
+    console.log(lat, lng);
+    this.lat = lat;
+    this.lng = lng;
+    this.velovService.getCoordVelov(lat, lng);
+    this.velovService.getVelovUpdated().subscribe((velovUpdated: Velov[]) => {
+      this.transformCoordinates(velovUpdated);
+    });
   }
 
   getVelov() {
     const result = this.searchFormGroup.get('search').value;
     this.velovService.getVelov(result);
     this.velovService.getVelovUpdated().subscribe((velovUpdated: Velov[]) => {
-      console.log(velovUpdated);
-      this.stationVelov = velovUpdated;
-      let res: ICoordinate = { name: null, available_bikes: null, available_bikes_stands: null, lat: null, lng: null };
-      this.coordinates = velovUpdated.map((oneVelovUpdated: Velov) => {
-        res = { ...res, name: oneVelovUpdated.properties.name };
-        res = { ...res, available_bikes: oneVelovUpdated.properties.available_bikes };
-        res = { ...res, available_bikes_stands: oneVelovUpdated.properties.available_bike_stands };
-        oneVelovUpdated.geometry.coordinates.map((coordinate, number) => {
-          if (number % 2 === 0) {
-            res = { ...res, lng: coordinate };
-          } else {
-            res = { ...res, lat: coordinate };
-          }
-        });
-        return res;
+      this.transformCoordinates(velovUpdated);
+    });
+  }
+
+  private transformCoordinates(velovUpdated: Velov[]) {
+    this.stationVelov = velovUpdated;
+    let res: ICoordinate = { name: null, available_bikes: null, available_bikes_stands: null, lat: null, lng: null };
+    this.coordinates = velovUpdated.map((oneVelovUpdated: Velov) => {
+      res = { ...res, name: oneVelovUpdated.properties.name };
+      res = { ...res, available_bikes: oneVelovUpdated.properties.available_bikes };
+      res = { ...res, available_bikes_stands: oneVelovUpdated.properties.available_bike_stands };
+      oneVelovUpdated.geometry.coordinates.map((coordinate, number) => {
+        if (number % 2 === 0) {
+          res = { ...res, lng: coordinate };
+        } else {
+          res = { ...res, lat: coordinate };
+        }
       });
+      return res;
     });
   }
 

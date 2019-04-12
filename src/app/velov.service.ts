@@ -21,6 +21,13 @@ export class VelovService {
     });
   }
 
+  getCoordVelov(lat: number, lng: number) {
+    const queryParams = `?lat=${lat}&lng=${lng}`;
+    this.httpClient.get<Velov[]>(BACKEND_URL + 'coordinates' + queryParams).subscribe((velovResult: Velov[]) => {
+      this.velovUpdated.next(velovResult);
+    });
+  }
+
   getVelovUpdated() {
     return this.velovUpdated.asObservable();
   }
