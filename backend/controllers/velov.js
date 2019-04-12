@@ -19,7 +19,7 @@ exports.getVelovCoord = (req, res, next) => {
         $maxDistance: 1000,
         $geometry: {
           type: 'Point',
-          coordinates: [parseFloat(req.params.lng), parseFloat(req.body.lat)]
+          coordinates: [parseFloat(req.query.lng), parseFloat(req.query.lat)]
         }
       }
     }
@@ -34,7 +34,6 @@ exports.getVelovCoord = (req, res, next) => {
 };
 
 exports.getVelov = (req, res, next) => {
-  // Using callback
   let latitude;
   let longitude;
   geocoder
