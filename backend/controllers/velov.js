@@ -11,7 +11,6 @@ const options = {
 };
 
 const geocoder = NodeGeocoder(options);
-
 exports.getVelovCoord = (req, res, next) => {
   Velov.find({
     geometry: {
@@ -39,7 +38,6 @@ exports.getVelov = (req, res, next) => {
   geocoder
     .geocode({ address: req.query.address, country: 'France' })
     .then(function(place) {
-      console.log(place);
       place.forEach(response => {
         if ((response.county === 'Lyon') | (response.county === 'Rhône')) {
           (latitude = response.latitude), (longitude = response.longitude);
