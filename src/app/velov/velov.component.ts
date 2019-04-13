@@ -3,6 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 import { VelovService } from '../velov.service';
 import { Velov } from '../velov';
+import { TouristiqueService } from '../touristique.service';
 
 @Component({
   selector: 'app-velov',
@@ -18,14 +19,13 @@ export class VelovComponent implements OnInit {
   lng = 4.883498;
   locationChosen = false;
 
-  constructor(private velovService: VelovService) {}
+  constructor(private velovService: VelovService, private ptTouristiqueService: TouristiqueService) {}
 
   ngOnInit() {
     this.initForm();
   }
 
   onChoseLocation(lat: number, lng: number) {
-    console.log(lat, lng);
     this.lat = lat;
     this.lng = lng;
     this.velovService.getCoordVelov(lat, lng);

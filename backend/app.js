@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const postRoutes = require('./routes/posts');
 const userRoutes = require('./routes/user');
 const velovRoutes = require('./routes/velov');
+const touristiqueRoutes = require('./routes/touristique');
 const config = require('config');
 const db = config.get('db');
 const Velov = require('./models/velov');
@@ -45,5 +46,6 @@ app.use((req, res, next) => {
 app.use('/api/posts', postRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/station', velovRoutes);
+app.use('/api/touris', touristiqueRoutes);
 
 module.exports = app;

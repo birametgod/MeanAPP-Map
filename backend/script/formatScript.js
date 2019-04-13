@@ -102,7 +102,7 @@ exports.formatPoinTouristiques = () => {
   db.once('open', () => {
     console.log('db connect');
 
-    db.dropCollection('poinTouristiques', function(err, result) {
+    db.dropCollection('pointouristiques', function(err, result) {
       if (err) {
         console.log('error delete collection');
       } else {
@@ -115,7 +115,7 @@ exports.formatPoinTouristiques = () => {
     if (!err && response.statusCode == 200) {
       const poinTouristiques = JSON.parse(body);
       poinTouristiques.features.forEach(poinTouristique => {
-        db.collection('poinTouristiques').insertMany(
+        db.collection('pointouristiques').insertMany(
           [
             {
               type: poinTouristique.type,
