@@ -14,23 +14,30 @@ const MongoClient = require('mongodb').MongoClient;
 const fs = require('fs');
 const formatScript = require('./script/formatScript');
 
-// formatScript.formatVelov();
-// formatScript.formatQuartiers();
-// formatScript.formatPoinTouristiques();
-mongoose.connect(db, {
-  useCreateIndex: true,
-  useNewUrlParser: true
-});
+formatScript.formatVelov();
+formatScript.formatQuartiers();
+formatScript.formatPoinTouristiques();
+mongoose
+  .connect(db, {
+    useCreateIndex: true,
+    useNewUrlParser: true
+  })
+  .then(() => {
+    console.log('connected to database');
+  })
+  .catch(() => {
+    console.log('connected failed');
+  });
 
-// setInterval(() => {
-//   formatScript.formatVelov();
-//   formatScript.formatQuartiers();
-//   formatScript.formatPoinTouristiques();
-//   mongoose.connect(db, {
-//     useCreateIndex: true,
-//     useNewUrlParser: true
-//   });
-// }, 60 * 60000);
+setInterval(() => {
+  formatScript.formatVelov();
+  formatScript.formatQuartiers();
+  formatScript.formatPoinTouristiques();
+  mongoose.connect(db, {
+    useCreateIndex: true,
+    useNewUrlParser: true
+  });
+}, 60 * 60000);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
